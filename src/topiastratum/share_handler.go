@@ -48,7 +48,7 @@ type shareHandler struct {
 
 func newShareHandler(topia *rpcclient.RPCClient) *shareHandler {
 	return &shareHandler{
-		kaspa:     topia,
+		topia:     topia,
 		stats:     map[string]*WorkStats{},
 		statsLock: sync.Mutex{},
 	}

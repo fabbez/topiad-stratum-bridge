@@ -54,7 +54,7 @@ func (ks *topiaApi) startStatsThread(ctx context.Context) {
 				ks.logger.Warn("failed to get network hashrate from topia, prom stats will be out of date", zap.Error(err))
 				continue
 			}
-			response, err := ks.kaspad.EstimateNetworkHashesPerSecond(dagResponse.TipHashes[0], 1000)
+			response, err := ks.topiad.EstimateNetworkHashesPerSecond(dagResponse.TipHashes[0], 1000)
 			if err != nil {
 				ks.logger.Warn("failed to get network hashrate from topia, prom stats will be out of date", zap.Error(err))
 				continue
@@ -65,7 +65,7 @@ func (ks *topiaApi) startStatsThread(ctx context.Context) {
 }
 
 func (ks *topiaApi) reconnect() error {
-	if ks.kaspad != nil {
+	if ks.topiad != nil {
 		return ks.topiad.Reconnect()
 	}
 

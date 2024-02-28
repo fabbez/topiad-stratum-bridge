@@ -29,11 +29,11 @@ type kaspaDiff struct {
 	targetValue *big.Int // previously know as fixedDifficultyBI
 }
 
-func newtopiaDiff() *topiaDiff {
-	return &topiaDiff{}
+func newKaspaDiff() *kaspaDiff {
+	return &kaspaDiff{}
 }
 
-func (k *topiaDiff) setDiffValue(diff float64) {
+func (k *kaspaDiff) setDiffValue(diff float64) {
 	k.diffValue = diff
 	k.targetValue = DiffToTarget(diff)
 	k.hashValue = DiffToHash(diff)

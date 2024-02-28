@@ -81,7 +81,7 @@ func ListenAndServe(cfg BridgeConfig) error {
 		go http.ListenAndServe(cfg.HealthCheckPort, nil)
 	}
 
-	shareHandler := newShareHandler(ksApi.kaspad)
+	shareHandler := newShareHandler(ksApi.topiad)
 	minDiff := float64(cfg.MinShareDiff)
 	if minDiff == 0 {
 		minDiff = 4

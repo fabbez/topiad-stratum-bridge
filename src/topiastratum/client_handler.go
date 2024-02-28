@@ -83,7 +83,7 @@ func (c *clientListener) OnDisconnect(ctx *gostratum.StratumContext) {
 	RecordDisconnect(ctx)
 }
 
-func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
+func (c *clientListener) NewBlockAvailable(kapi *topiaApi) {
 	c.clientLock.Lock()
 	addresses := make([]string, 0, len(c.clients))
 	for _, cl := range c.clients {
@@ -105,11 +105,11 @@ func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
 			if err != nil {
 				if strings.Contains(err.Error(), "Could not decode address") {
 					RecordWorkerError(client.WalletAddr, ErrInvalidAddressFmt)
-					client.Logger.Error(fmt.Sprintf("failed fetching new block template from kaspa, malformed address: %s", err))
+					client.Logger.Error(fmt.Sprintf("failed fetching new block template from topia, malformed address: %s", err))
 					client.Disconnect() // unrecoverable
 				} else {
 					RecordWorkerError(client.WalletAddr, ErrFailedBlockFetch)
-					client.Logger.Error(fmt.Sprintf("failed fetching new block template from kaspa: %s", err))
+					client.Logger.Error(fmt.Sprintf("failed fetching new block template from topia: %s", err))
 				}
 				return
 			}
@@ -177,9 +177,9 @@ func (c *clientListener) NewBlockAvailable(kapi *KaspaApi) {
 		c.lastBalanceCheck = time.Now()
 		if len(addresses) > 0 {
 			go func() {
-				balances, err := kapi.kaspad.GetBalancesByAddresses(addresses)
+				balances, err := kapi.topiad.GetBalancesByAddresses(addresses)
 				if err != nil {
-					c.logger.Warn("failed to get balances from kaspa, prom stats will be out of date", zap.Error(err))
+					c.logger.Warn("failed to get balances from topia, prom stats will be out of date", zap.Error(err))
 					return
 				}
 				RecordBalances(balances)
