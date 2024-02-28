@@ -11,7 +11,7 @@ This daemon is confirmed working with the miners below in both kaspa-only and du
 
 Hive setup: [detailed instructions here](docs/hive-setup.md) 
 
-Discord discussions/issues: [here](https://discord.com/channels/599153230659846165/1025501807570600027) 
+
 
 
   
@@ -87,7 +87,7 @@ ks_worker_job_counter{ip="192.168.0.65",miner="BzMiner-v11.1.0",wallet="kaspa:qz
 
 * run `./topiabridge` in the `cmd/topiabridge` directory
 
-All-in-one (build + run) `cd cmd/kaspabridge/;go build .;./topiabridge`
+All-in-one (build + run) `cd cmd/topiabridge/;go build .;./topiabridge`
 
 
 
